@@ -1,6 +1,6 @@
 from sqlalchemy import Engine
-from customer_orders.sources.db_engine import get_engine
-from customer_orders.sources.db_repository import get_customers, get_orders, get_currency_exchanges
+from extractors.customer_orders.sources.db_engine import get_engine
+from extractors.customer_orders.sources.db_repository import get_customers, get_orders, get_currency_exchanges
 
 
 def main() -> None:
