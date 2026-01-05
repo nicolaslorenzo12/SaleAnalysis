@@ -8,8 +8,8 @@ import sqlalchemy
 from sqlalchemy import Engine
 from sqlalchemy.exc import SQLAlchemyError
 
-from errors.db import DatabaseConnectionError
-from errors.enviroment_variables import MissingEnvironmentVariableError
+from models.errors.db import DatabaseConnectionError
+from models.errors.enviroment_variables import MissingEnvironmentVariableError
 from models.db_connection.sql_config import SqlConfig
 
 
