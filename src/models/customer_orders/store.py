@@ -6,22 +6,20 @@ from pydantic import BaseModel, Field, field_validator, computed_field
 
 
 class Store(BaseModel):
-    StoreKey: int = Field(..., ge=1)
+    StoreKey: int
+    StoreCode: int
+    GeoAreaKey: int
 
-    # -1 = not applicable (e.g., Online store), >=1 = physical store values
-    StoreCode: int = Field(..., ge=-1)
-    GeoAreaKey: int = Field(..., ge=-1)
-
-    CountryCode: Optional[str] = Field(None, max_length=50)
-    CountryName: Optional[str] = Field(None, max_length=50)
-    State: Optional[str] = Field(None, max_length=100)
+    CountryCode: Optional[str] = None
+    CountryName: Optional[str] = None
+    State: Optional[str] = None
 
     OpenDate: Optional[date] = None
     CloseDate: Optional[date] = None
 
-    Description: Optional[str] = Field(None, max_length=100)
-    SquareMeters: Optional[int] = Field(None, ge=0)
-    Status: Optional[str] = Field(None, max_length=50)
+    Description: Optional[str] = None
+    SquareMeters: Optional[int] = None
+    Status: Optional[str] = None
 
     @field_validator(
         "CountryCode", "CountryName", "State", "Description", "Status",

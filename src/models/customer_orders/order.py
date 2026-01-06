@@ -3,14 +3,14 @@ from pydantic import BaseModel, Field
 
 
 class Order(BaseModel):
-    OrderKey: int = Field(..., ge=1)
-    CustomerKey: int = Field(..., ge=1)
-    StoreKey: int = Field(..., ge=1)
+    OrderKey: int
+    CustomerKey: int
+    StoreKey: int
 
     OrderDate: date
     DeliveryDate: date
 
-    CurrencyCode: str = Field(..., max_length=5)
+    CurrencyCode: str | None = None
 
     model_config = {
         "from_attributes": True,

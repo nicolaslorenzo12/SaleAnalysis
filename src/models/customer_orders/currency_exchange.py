@@ -5,8 +5,8 @@ from pydantic import BaseModel, Field
 class CurrencyExchange(BaseModel):
     Date: date
 
-    FromCurrency: str = Field(..., min_length=3, max_length=3)
-    ToCurrency: str = Field(..., min_length=3, max_length=3)
+    FromCurrency: str
+    ToCurrency: str
 
     Exchange: float
 

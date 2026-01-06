@@ -7,9 +7,9 @@ import os
 STORES_PATH = Path(os.environ["CUSTOMER_ORDERS_STORES_CSV_PATH"])
 
 from sqlalchemy import Engine
-from extractors.customer_orders.sources.customer_orders_db_engine import get_engine
-from extractors.customer_orders.sources.customer_orders_db_repository import get_customers, get_orders, get_currency_exchanges
-from extractors.customer_orders.sources.stores_csv_repository import get_stores_from_csv
+from pipeline.extractors.customer_orders.sources.customer_orders_db_engine import get_engine
+from pipeline.extractors.customer_orders.sources.customer_orders_db_repository import get_customers, get_orders, get_currency_exchanges
+from pipeline.extractors.customer_orders.sources.stores_csv_repository import get_stores_from_csv
 
 
 def main() -> None:

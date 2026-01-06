@@ -1,5 +1,5 @@
 from datetime import date
-from typing import Optional
+from typing import Optional, get_origin, get_args
 
 from pydantic import BaseModel, Field, field_validator
 
@@ -11,33 +11,32 @@ class Customer(BaseModel):
     StartDT: Optional[date] = None
     EndDT: Optional[date] = None
 
-    Continent: Optional[str] = Field(None, max_length=50)
-    Gender: Optional[str] = Field(None, max_length=10)
-    Title: Optional[str] = Field(None, max_length=50)
-    GivenName: Optional[str] = Field(None, max_length=150)
-    MiddleInitial: Optional[str] = Field(None, max_length=150)
-    Surname: Optional[str] = Field(None, max_length=150)
-    StreetAddress: Optional[str] = Field(None, max_length=150)
-    City: Optional[str] = Field(None, max_length=50)
-    State: Optional[str] = Field(None, max_length=50)
-    StateFull: Optional[str] = Field(None, max_length=50)
-    ZipCode: Optional[str] = Field(None, max_length=50)
-    Country: Optional[str] = Field(None, max_length=50)
-    CountryFull: Optional[str] = Field(None, max_length=50)
+    Continent: Optional[str] = None
+    Gender: Optional[str] = None
+    Title: Optional[str] = None
+    GivenName: Optional[str] = None
+    MiddleInitial: Optional[str] = None
+    Surname: Optional[str] = None
+    StreetAddress: Optional[str] = None
+    City: Optional[str] = None
+    State: Optional[str] = None
+    StateFull: Optional[str] = None
+    ZipCode: Optional[str] = None
+    Country: Optional[str] = None
+    CountryFull: Optional[str] = None
 
     Birthday: date
-    Age: int = Field(..., ge=0, le=150)
+    Age: int | None = None
+    Occupation: Optional[str] = None
+    Company: Optional[str] = None
+    Vehicle: Optional[str] = None
 
-    Occupation: Optional[str] = Field(None, max_length=100)
-    Company: Optional[str] = Field(None, max_length=50)
-    Vehicle: Optional[str] = Field(None, max_length=50)
+    Latitude: float | None = None
+    Longitude: float | None = None
 
-    Latitude: float = Field(..., ge=-90, le=90)
-    Longitude: float = Field(..., ge=-180, le=180)
 
 
     model_config = {
         "from_attributes": True,
         "extra": "forbid",
-        "validate_assignment": True,
     }
