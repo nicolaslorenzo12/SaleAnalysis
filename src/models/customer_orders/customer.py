@@ -35,13 +35,6 @@ class Customer(BaseModel):
     Latitude: float = Field(..., ge=-90, le=90)
     Longitude: float = Field(..., ge=-180, le=180)
 
-    @field_validator("EndDT")
-    @classmethod
-    def end_after_start(cls, v, info):
-        start = info.data.get("StartDT")
-        if v and start and v < start:
-            raise ValueError("EndDT cannot be earlier than StartDT")
-        return v
 
     model_config = {
         "from_attributes": True,
