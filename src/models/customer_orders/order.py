@@ -1,4 +1,6 @@
 from datetime import date
+from typing import Optional
+
 from pydantic import BaseModel, Field
 
 
@@ -7,13 +9,12 @@ class Order(BaseModel):
     CustomerKey: int
     StoreKey: int
 
-    OrderDate: date
-    DeliveryDate: date
+    OrderDate: Optional[date] = None
+    DeliveryDate: Optional[date] = None
 
-    CurrencyCode: str | None = None
+    CurrencyCode: Optional[str] = None
 
     model_config = {
         "from_attributes": True,
         "extra": "forbid",
-        "validate_assignment": True,
     }

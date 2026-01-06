@@ -39,5 +39,4 @@ class Store(BaseModel):
 
     model_config = {
         "extra": "forbid",
-        "validate_assignment": True,
     }

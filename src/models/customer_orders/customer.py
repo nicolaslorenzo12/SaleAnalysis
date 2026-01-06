@@ -5,8 +5,8 @@ from pydantic import BaseModel, Field, field_validator
 
 
 class Customer(BaseModel):
-    CustomerKey: int = Field(..., ge=1)
-    GeoAreaKey: int = Field(..., ge=1)
+    CustomerKey: int
+    GeoAreaKey: int
 
     StartDT: Optional[date] = None
     EndDT: Optional[date] = None
@@ -25,7 +25,7 @@ class Customer(BaseModel):
     Country: Optional[str] = None
     CountryFull: Optional[str] = None
 
-    Birthday: date
+    Birthday: date | None = None
     Age: int | None = None
     Occupation: Optional[str] = None
     Company: Optional[str] = None

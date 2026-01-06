@@ -3,28 +3,27 @@ from pydantic import BaseModel, Field
 
 
 class Product(BaseModel):
-    ProductKey: int = Field(..., ge=1)
-    ProductCode: str = Field(..., max_length=50)
-    ProductName: str = Field(..., max_length=200)
+    ProductKey: int
+    ProductCode: str
+    ProductName: Optional[str] = None
 
-    Manufacturer: str = Field(..., max_length=100)
-    Brand: str = Field(..., max_length=100)
-    Color: Optional[str] = Field(None, max_length=50)
+    Manufacturer: Optional[str] = None
+    Brand: Optional[str] = None
+    Color: Optional[str] = None
 
-    WeightUnit: Optional[str] = Field(None, max_length=50)
-    Weight: Optional[float] = Field(None, ge=0)
+    WeightUnit: Optional[str] = None
+    Weight: Optional[float] = None
 
-    Cost: float = Field(..., ge=0)
-    Price: float = Field(..., ge=0)
+    Cost: Optional[float] = None
+    Price: Optional[float] = None
 
-    CategoryKey: int = Field(..., ge=1)
-    CategoryName: str = Field(..., max_length=100)
+    CategoryKey: Optional[int] = None
+    CategoryName: Optional[str] = None
 
-    SubCategoryKey: int = Field(..., ge=1)
-    SubCategoryName: str = Field(..., max_length=100)
+    SubCategoryKey: Optional[int] = None
+    SubCategoryName: Optional[str] = None
 
     model_config = {
         "from_attributes": True,
         "extra": "forbid",
-        "validate_assignment": True,
     }
