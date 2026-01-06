@@ -1,30 +1,23 @@
 from __future__ import annotations
-from typing import Any, TypeVar, Type
 
 import pandas as pd
 from sqlalchemy import Engine
-from pydantic import BaseModel, ValidationError
 
-from models.customer_orders.currency_exchange import CurrencyExchange
 from models.customer_orders.customer import Customer
 from models.customer_orders.order import Order
-from pipeline.validation.row_validation import validate_rows_with_optional_cleanup
-
-T = TypeVar("T", bound=BaseModel)
-
-def load_db_table(engine: Engine, table: str, model: Type[T]) -> list[T]:
-    df = pd.read_sql(f"SELECT * FROM [dbo].[{table}]", engine)
-    rows = df.to_dict(orient="records")
-    return validate_rows_with_optional_cleanup(rows, model)
+from models.customer_orders.currency_exchange import CurrencyExchange
 
 
-def get_customers(engine: Engine) -> list[Customer]:
-    return load_db_table(engine, "Customer", Customer)
+def load_customers(engine: Engine) -> list[Customer]:
+    df_customers = pd.read_sql("SELECT * FROM [dbo].[Customer]", engine)
+    return [Customer.model_validate(customer) for customer in df_customers.to_dict(orient="records")]
 
 
-def get_orders(engine: Engine) -> list[Order]:
-    return load_db_table(engine, "Orders", Order)
+def load_orders(engine: Engine) -> list[Order]:
+    df_orders = pd.read_sql("SELECT * FROM [dbo].[Orders]", engine)
+    return [Order.model_validate(order) for order in df_orders.to_dict(orient="records")]
 
 
-def get_currency_exchanges(engine: Engine) -> list[CurrencyExchange]:
-    return load_db_table(engine, "CurrencyExchange", CurrencyExchange)
+def load_currency_exchanges(engine: Engine) -> list[CurrencyExchange]:
+    df_currency_exchange = pd.read_sql("SELECT * FROM [dbo].[CurrencyExchange]", engine)
+    return [CurrencyExchange.model_validate(currency_exchange) for currency_exchange in df_currency_exchange.to_dict(orient="records")]

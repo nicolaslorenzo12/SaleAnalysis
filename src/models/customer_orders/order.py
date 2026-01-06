@@ -16,5 +16,4 @@ class Order(BaseModel):
 
     model_config = {
         "from_attributes": True,
-        "extra": "forbid",
     }

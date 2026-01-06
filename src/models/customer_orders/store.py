@@ -38,5 +38,5 @@ class Store(BaseModel):
 
 
     model_config = {
-        "extra": "forbid",
+        "from_attributes": True,
     }
