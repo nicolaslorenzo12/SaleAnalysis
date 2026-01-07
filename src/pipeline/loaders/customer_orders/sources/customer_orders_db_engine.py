@@ -39,7 +39,7 @@ def load_sql_config() -> SqlConfig:
 
 
 def build_connection_string(cfg: SqlConfig) -> str:
-    # Quote password to avoid special-character issues
+
     pw = quote_plus(cfg.password)
     return (
         f"mssql+pyodbc://{cfg.user}:{pw}@{cfg.server}/{cfg.database}"

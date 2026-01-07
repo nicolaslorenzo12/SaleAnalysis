@@ -1,5 +1,5 @@
 from typing import Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 
 class Product(BaseModel):
@@ -22,7 +22,3 @@ class Product(BaseModel):
 
     SubCategoryKey: Optional[int] = None
     SubCategoryName: Optional[str] = None
-
-    model_config = {
-        "from_attributes": True,
-    }

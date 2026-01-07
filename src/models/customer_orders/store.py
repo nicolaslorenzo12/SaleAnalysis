@@ -8,7 +8,7 @@ from pydantic import BaseModel, Field, field_validator, computed_field
 class Store(BaseModel):
     StoreKey: int
     StoreCode: int
-    GeoAreaKey: int
+    GeoAreaKey: Optional[int] = None
 
     CountryCode: Optional[str] = None
     CountryName: Optional[str] = None
@@ -36,7 +36,3 @@ class Store(BaseModel):
             return None
         return v
 
-
-    model_config = {
-        "from_attributes": True,
-    }
