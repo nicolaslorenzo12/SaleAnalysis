@@ -18,7 +18,7 @@ def raise_if_missing_env_vars(missing: list[str]) -> None:
         raise MissingEnvironmentVariableError(
             f"Missing required environment variables: {', '.join(missing)}"
         )
-
+    
 def load_sql_config() -> SqlConfig:
     required_env_vars = {
         "SQL_USER": os.getenv("SQL_USER"),
