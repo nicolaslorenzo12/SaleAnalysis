@@ -1,17 +1,17 @@
+from dotenv import load_dotenv
+import os
+
 from pathlib import Path
 
-from dotenv import load_dotenv
-
 from pipeline.extract import extract_data
-load_dotenv()
-import os
+from pipeline.infrastructure.databases.customer_orders_engine import get_engine
+
 
 STORES_PATH = Path(os.environ["CUSTOMER_ORDERS_STORES_CSV_PATH"])
 PRODUCTS_PATH = Path(os.environ["PRODUCTS_JSON_PATH"])
 ORDER_ROWS_PATH = Path(os.environ["ORDER_ROWS_PARQUET_PATH"])
 
 from sqlalchemy import Engine
-from pipeline.loaders.customer_orders.sources.customer_orders_db_engine import get_engine
 
 
 def run_pipeline() -> None:
@@ -39,4 +39,5 @@ def run_pipeline() -> None:
 
 
 if __name__ == "__main__":
+    load_dotenv()
     run_pipeline()

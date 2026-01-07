@@ -1,5 +1,5 @@
 from pathlib import Path
-from pipeline.validation.filesystem import ensure_file_exists, read_csv_or_fail
+from pipeline.utils.file_readers import ensure_file_exists, read_csv_or_fail
 from models.customer_orders.store import Store
 
 

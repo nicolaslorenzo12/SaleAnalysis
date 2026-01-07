@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from models.customer_orders.order_row import OrderRow
-from pipeline.validation.filesystem import ensure_file_exists, read_parquet_or_fail
+from pipeline.utils.file_readers import ensure_file_exists, read_parquet_or_fail
 
 
 def load_order_rows_from_parquet(order_rows_parquet_path: Path) -> list[OrderRow]:
