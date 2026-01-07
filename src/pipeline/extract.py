@@ -2,11 +2,11 @@ from pathlib import Path
 
 from models.extracted_data.customer_orders_extracted_data import CustomerOrdersExtractedData
 from sqlalchemy import Engine
-from pipeline.loaders.customer_orders.db_tables_loader import load_customers, load_orders, \
+from pipeline.extractors.customer_orders.db_tables_extractor import load_customers, load_orders, \
     load_currency_exchanges
-from pipeline.loaders.customer_orders.order_rows_loader import load_order_rows_from_parquet
-from pipeline.loaders.customer_orders.products_loader import load_products_from_json
-from pipeline.loaders.customer_orders.stores_loader import load_stores_from_csv
+from pipeline.extractors.customer_orders.order_rows_extractor import load_order_rows_from_parquet
+from pipeline.extractors.customer_orders.products_extractor import load_products_from_json
+from pipeline.extractors.customer_orders.stores_extractor import load_stores_from_csv
 
 
 def extract_data(engine: Engine, stores_path:Path, products_path: Path, order_rows_path: Path) -> CustomerOrdersExtractedData:
