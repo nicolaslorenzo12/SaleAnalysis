@@ -3,7 +3,7 @@ import os
 
 from pathlib import Path
 
-from pipeline.extract import extract_data
+from pipeline.ingest import ingest_data
 from pipeline.infrastructure.databases.customer_orders_engine import get_engine
 
 
@@ -17,7 +17,7 @@ from sqlalchemy import Engine
 def run_pipeline() -> None:
     engine:Engine = get_engine()
 
-    extracted_data = extract_data(engine, STORES_PATH, PRODUCTS_PATH, ORDER_ROWS_PATH)
+    extracted_data = ingest_data(engine, STORES_PATH, PRODUCTS_PATH, ORDER_ROWS_PATH)
 
     for customer in extracted_data.customers[:5]:
         print(customer)

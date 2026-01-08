@@ -4,10 +4,10 @@ from typing import Optional
 from pydantic import BaseModel
 
 
-class Order(BaseModel):
+class RawOrder(BaseModel):
     OrderKey: int
-    CustomerKey: int
-    StoreKey: int
+    CustomerKey: Optional[int] = None
+    StoreKey: Optional[int] = None
 
     OrderDate: Optional[date] = None
     DeliveryDate: Optional[date] = None

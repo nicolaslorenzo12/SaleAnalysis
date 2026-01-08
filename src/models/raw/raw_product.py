@@ -2,7 +2,7 @@ from typing import Optional
 from pydantic import BaseModel, Field, field_validator
 
 
-class Product(BaseModel):
+class RawProduct(BaseModel):
     ProductKey: int
     ProductCode: str
     ProductName: Optional[str] = None

@@ -1,18 +1,18 @@
 from dataclasses import dataclass
 
-from models.customer_orders.currency_exchange import CurrencyExchange
-from models.customer_orders.customer import Customer
-from models.customer_orders.order import Order
-from models.customer_orders.order_row import OrderRow
-from models.customer_orders.product import Product
-from models.customer_orders.store import Store
+from models.raw.raw_currency_exchange import RawCurrencyExchange
+from models.raw.raw_customer import RawCustomer
+from models.raw.raw_order import RawOrder
+from models.raw.raw_order_row import RawOrderRow
+from models.raw.raw_product import RawProduct
+from models.raw.raw_store import RawStore
 
 
 @dataclass(frozen=True)
 class CustomerOrdersExtractedData:
-    customers: list[Customer]
-    orders: list[Order]
-    currency_exchanges: list[CurrencyExchange]
-    stores: list[Store]
-    products: list[Product]
-    order_rows: list[OrderRow]
+    customers: list[RawCustomer]
+    orders: list[RawOrder]
+    currency_exchanges: list[RawCurrencyExchange]
+    stores: list[RawStore]
+    products: list[RawProduct]
+    order_rows: list[RawOrderRow]

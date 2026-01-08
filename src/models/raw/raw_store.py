@@ -5,7 +5,7 @@ from typing import Optional
 from pydantic import BaseModel, Field, field_validator, computed_field
 
 
-class Store(BaseModel):
+class RawStore(BaseModel):
     StoreKey: int
     StoreCode: int
     GeoAreaKey: Optional[int] = None

@@ -4,7 +4,7 @@ from typing import Optional, get_origin, get_args
 from pydantic import BaseModel, Field, field_validator
 
 
-class Customer(BaseModel):
+class RawCustomer(BaseModel):
     CustomerKey: int
     GeoAreaKey: Optional[int] = None
 

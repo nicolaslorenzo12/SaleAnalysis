@@ -2,7 +2,7 @@ from datetime import date
 from pydantic import BaseModel, Field
 
 
-class CurrencyExchange(BaseModel):
+class RawCurrencyExchange(BaseModel):
     Date: date
 
     FromCurrency: str
