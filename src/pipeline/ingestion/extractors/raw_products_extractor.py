@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from models.raw.raw_product import RawProduct
+from models.customer_orders.raw.raw_product import RawProduct
 from pipeline.utils.file_readers import ensure_file_exists, read_json_or_fail
 
 

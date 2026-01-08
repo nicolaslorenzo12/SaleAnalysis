@@ -1,7 +1,7 @@
 import sqlalchemy
 from sqlalchemy import Engine, text
 
-from models.raw.raw_order import RawOrder
+from models.customer_orders.raw.raw_order import RawOrder
 
 
 def extract_raw_orders(engine: Engine) -> list[RawOrder]:

@@ -1,7 +1,7 @@
 import sqlalchemy
 from sqlalchemy import Engine, text
 
-from models.raw.raw_customer import RawCustomer
+from models.customer_orders.raw.raw_customer import RawCustomer
 
 
 def extract_raw_customers(engine: Engine) -> list[RawCustomer]:

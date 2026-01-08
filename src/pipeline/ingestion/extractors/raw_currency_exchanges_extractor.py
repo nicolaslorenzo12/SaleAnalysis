@@ -1,7 +1,7 @@
 import sqlalchemy
 from sqlalchemy import Engine, text
 
-from models.raw.raw_currency_exchange import RawCurrencyExchange
+from models.customer_orders.raw.raw_currency_exchange import RawCurrencyExchange
 
 
 def extract_raw_currency_exchanges(engine: Engine) -> list[RawCurrencyExchange]:

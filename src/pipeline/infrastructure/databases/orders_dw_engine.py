@@ -24,7 +24,7 @@ def load_sql_config() -> SqlConfig:
         "SQL_USER": os.getenv("SQL_USER"),
         "SQL_PASSWORD": os.getenv("SQL_PASSWORD"),
         "SQL_SERVER": os.getenv("SQL_SERVER"),
-        "SQL_DATABASE_CUSTOMER_ORDERS": os.getenv("SQL_DATABASE_CUSTOMER_ORDERS"),
+        "SQL_DATABASE_ORDERS_DW": os.getenv("SQL_DATABASE_ORDERS_DW"),
     }
 
     missing = [k for k, v in required_env_vars.items() if not v]
@@ -34,7 +34,7 @@ def load_sql_config() -> SqlConfig:
         user=required_env_vars["SQL_USER"],
         password=required_env_vars["SQL_PASSWORD"],
         server=required_env_vars["SQL_SERVER"],
-        database=required_env_vars["SQL_DATABASE_CUSTOMER_ORDERS"],
+        database=required_env_vars["SQL_DATABASE_ORDERS_DW"],
     )
 
 
@@ -48,7 +48,7 @@ def build_connection_string(cfg: SqlConfig) -> str:
 
 
 @lru_cache(maxsize=1)
-def get_customer_orders_engine() -> Engine:
+def get_orders_dw_engine() -> Engine:
     cfg = load_sql_config()
     connection_string = build_connection_string(cfg)
 

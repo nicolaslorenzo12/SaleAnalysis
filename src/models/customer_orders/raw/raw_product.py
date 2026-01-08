@@ -4,7 +4,7 @@ from pydantic import BaseModel, Field, field_validator
 
 class RawProduct(BaseModel):
     ProductKey: int
-    ProductCode: str
+    ProductCode: Optional[str] = None
     ProductName: Optional[str] = None
 
     Manufacturer: Optional[str] = None

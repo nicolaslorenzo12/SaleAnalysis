@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from models.raw.raw_order_row import RawOrderRow
+from models.customer_orders.raw.raw_order_row import RawOrderRow
 from pipeline.utils.file_readers import ensure_file_exists, read_parquet_or_fail
 
 
