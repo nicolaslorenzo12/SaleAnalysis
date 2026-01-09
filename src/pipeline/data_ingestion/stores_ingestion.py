@@ -5,15 +5,15 @@ logger = logging.getLogger(__name__)
 
 from models.customer_orders.transformed.transformed_customer import TransformedCustomer
 from models.customer_orders.raw.raw_customer import RawCustomer
-from pipeline.ingestion.extractors.raw_customers_extractor import extract_raw_customers
-from pipeline.ingestion.normalization.normalize_customers import transform_customers
-from pipeline.ingestion.loaders.customers_loader import load_customers
+from pipeline.data_ingestion.extractors.raw_customers_extractor import extract_raw_customers
+from pipeline.data_ingestion.transformers.transform_customers import transform_customers
+from pipeline.data_ingestion.loaders.customers_loader import load_customers
 
 
-def ingest_customers(customer_orders_engine: Engine, orders_dw_engine: Engine):
-    logger.info("Extracting customers")
+def ingest_stores(customer_orders_engine: Engine, orders_dw_engine: Engine):
+    logger.info("Extracting stores")
     raw_customer_list: list[RawCustomer] = extract_raw_customers(customer_orders_engine)
-    logger.info("Transforming customers")
+    logger.info("Transforming stores")
     transformed_customer_list: list[TransformedCustomer] = transform_customers(raw_customer_list)
-    logger.info("Loading customers")
+    logger.info("Loading stores")
     load_customers(orders_dw_engine, transformed_customer_list)

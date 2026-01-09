@@ -8,8 +8,7 @@ from sqlalchemy import Engine
 from pipeline.infrastructure.databases.customer_orders_engine import get_customer_orders_engine
 from pipeline.infrastructure.databases.orders_dw_engine import get_orders_dw_engine
 from pipeline.infrastructure.logging_config.logging import configure_logging
-from pipeline.ingestion.customer_ingestion import ingest_customers
-
+from pipeline.data_ingestion.customers_ingestion import ingest_customers
 
 def run_pipeline() -> None:
     configure_logging()
@@ -25,7 +24,7 @@ def run_pipeline() -> None:
     logger.info("Creating orders DW engine")
     orders_dw_engine: Engine = get_orders_dw_engine()
 
-    logger.info("Starting customer ingestion")
+    logger.info("Starting customer data_ingestion")
     ingest_customers(customer_orders_engine, orders_dw_engine)
 
     logger.info("Customers loaded successfully")

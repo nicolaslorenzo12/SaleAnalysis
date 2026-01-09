@@ -9,6 +9,6 @@ class RawOrderRow(BaseModel):
     LineNumber: int
     ProductKey: int
     Quantity: int
-    UnitPrice: Optional[Decimal] = None
-    NetPrice: Optional[Decimal] = None
-    UnitCost: Optional[Decimal] = None
+    UnitPrice: Decimal
+    NetPrice: Decimal
+    UnitCost: Decimal
