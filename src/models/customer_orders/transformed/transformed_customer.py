@@ -4,7 +4,7 @@ from typing import Optional, get_origin, get_args
 from pydantic import BaseModel, Field, field_validator
 
 
-class NormalizedCustomer(BaseModel):
+class TransformedCustomer(BaseModel):
     CustomerKey: int
     Gender: Optional[str] = None
     FullName: Optional[str] = None

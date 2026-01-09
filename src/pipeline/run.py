@@ -1,25 +1,35 @@
-from dotenv import load_dotenv
-import os
+from __future__ import annotations
 
-from pathlib import Path
+import logging
+
+from dotenv import load_dotenv
+from sqlalchemy import Engine
+
 from pipeline.infrastructure.databases.customer_orders_engine import get_customer_orders_engine
 from pipeline.infrastructure.databases.orders_dw_engine import get_orders_dw_engine
-from pipeline.ingestion.ingestion import ingest_data
-
-STORES_PATH = Path(os.environ["CUSTOMER_ORDERS_STORES_CSV_PATH"])
-PRODUCTS_PATH = Path(os.environ["PRODUCTS_JSON_PATH"])
-ORDER_ROWS_PATH = Path(os.environ["ORDER_ROWS_PARQUET_PATH"])
-
-from sqlalchemy import Engine
+from pipeline.infrastructure.logging_config.logging import configure_logging
+from pipeline.ingestion.customer_ingestion import ingest_customers
 
 
 def run_pipeline() -> None:
+    configure_logging()
+    logger = logging.getLogger(__name__)
 
-    customer_orders_engine:Engine = get_customer_orders_engine()
-    orders_dw_engine:Engine = get_orders_dw_engine()
+    load_dotenv()
 
-    ingest_data(customer_orders_engine, orders_dw_engine,STORES_PATH, PRODUCTS_PATH, ORDER_ROWS_PATH)
+    logger.info("Starting pipeline")
+
+    logger.info("Creating customer orders engine")
+    customer_orders_engine: Engine = get_customer_orders_engine()
+
+    logger.info("Creating orders DW engine")
+    orders_dw_engine: Engine = get_orders_dw_engine()
+
+    logger.info("Starting customer ingestion")
+    ingest_customers(customer_orders_engine, orders_dw_engine)
+
+    logger.info("Customers loaded successfully")
+
 
 if __name__ == "__main__":
-    load_dotenv()
     run_pipeline()

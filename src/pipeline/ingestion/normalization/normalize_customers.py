@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import List, Optional
 
 from models.customer_orders.raw.raw_customer import RawCustomer
-from models.customer_orders.normalized.normalized_customer import NormalizedCustomer
+from models.customer_orders.transformed.transformed_customer import TransformedCustomer
 from pipeline.utils.strings import strip_string
 
 
@@ -20,13 +20,13 @@ def _build_full_name(
 
 
 
-def normalize_customers(raw_customers: List[RawCustomer]) -> List[NormalizedCustomer]:
+def transform_customers(raw_customers: list[RawCustomer]) -> list[TransformedCustomer]:
 
-    normalized_customers: List[NormalizedCustomer] = []
+    transformed_customers: List[TransformedCustomer] = []
 
     for raw_customer in raw_customers:
-        normalized_customers.append(
-            NormalizedCustomer(
+        transformed_customers.append(
+            TransformedCustomer(
                 CustomerKey=raw_customer.CustomerKey,
                 Gender=strip_string(raw_customer.Gender),
                 FullName=_build_full_name(raw_customer.GivenName, raw_customer.Surname),
@@ -39,4 +39,4 @@ def normalize_customers(raw_customers: List[RawCustomer]) -> List[NormalizedCust
             )
         )
 
-    return normalized_customers
+    return transformed_customers
