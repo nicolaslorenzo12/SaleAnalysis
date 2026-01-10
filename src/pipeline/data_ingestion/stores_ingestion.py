@@ -1,19 +1,21 @@
 import logging
+from pathlib import Path
+
 from sqlalchemy import Engine
+
+from models.customer_orders.raw.raw_store import RawStore
+from models.customer_orders.transformed.transformed_store import TransformedStore
+from pipeline.data_ingestion.extractors.raw_stores_extractor import extract_raw_stores_from_csv
+from pipeline.data_ingestion.loaders.stores_loader import load_stores
+from pipeline.data_ingestion.transformers.stores_transformer import transform_stores
 
 logger = logging.getLogger(__name__)
 
-from models.customer_orders.transformed.transformed_customer import TransformedCustomer
-from models.customer_orders.raw.raw_customer import RawCustomer
-from pipeline.data_ingestion.extractors.raw_customers_extractor import extract_raw_customers
-from pipeline.data_ingestion.transformers.transform_customers import transform_customers
-from pipeline.data_ingestion.loaders.customers_loader import load_customers
 
-
-def ingest_stores(customer_orders_engine: Engine, orders_dw_engine: Engine):
+def ingest_stores(store_csv_file_path: Path,  orders_dw_engine: Engine):
     logger.info("Extracting stores")
-    raw_customer_list: list[RawCustomer] = extract_raw_customers(customer_orders_engine)
+    raw_store_list: list[RawStore] = extract_raw_stores_from_csv(store_csv_file_path)
     logger.info("Transforming stores")
-    transformed_customer_list: list[TransformedCustomer] = transform_customers(raw_customer_list)
+    transformed_store_list: list[TransformedStore] = transform_stores(raw_store_list)
     logger.info("Loading stores")
-    load_customers(orders_dw_engine, transformed_customer_list)
+    load_stores(orders_dw_engine, transformed_store_list)

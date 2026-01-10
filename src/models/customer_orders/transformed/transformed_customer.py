@@ -10,5 +10,7 @@ class TransformedCustomer:
     FullName: Optional[str] = None
     City: Optional[str] = None
     State: Optional[str] = None
+    StateCode: Optional[str] = None
     Country: Optional[str] = None
+    CountryCode: Optional[str] = None
     Birthday: Optional[date] = None
