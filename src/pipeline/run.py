@@ -6,8 +6,10 @@ from pathlib import Path
 from dotenv import load_dotenv
 from sqlalchemy import Engine
 
+from pipeline.config.file_paths.products_json_file_path import get_customer_orders_products_json_path
 from pipeline.config.file_paths.store_csv_file_path import get_customer_orders_stores_csv_path
 from pipeline.data_ingestion.date_ingestion import ingest_dates
+from pipeline.data_ingestion.products_ingestion import ingest_products
 from pipeline.data_ingestion.stores_ingestion import ingest_stores
 from pipeline.infrastructure.databases.customer_orders_engine import get_customer_orders_engine
 from pipeline.infrastructure.databases.orders_dw_engine import get_orders_dw_engine
@@ -33,15 +35,21 @@ def run_pipeline() -> None:
 
     logger.info("Customers loaded successfully")
 
-    logger.info("Starting date data ingestion")
+    logger.info("Starting dates ingestion")
     ingest_dates(customer_orders_engine, orders_dw_engine)
     logger.info("Dates loaded successfully")
 
     stores_csv_path: Path = get_customer_orders_stores_csv_path()
 
-    logger.info("Starting store data ingestion")
+    logger.info("Starting stores ingestion")
     ingest_stores(stores_csv_path, orders_dw_engine)
     logger.info("Stores loaded successfully")
+
+    products_json_path: Path = get_customer_orders_products_json_path()
+
+    logger.info("Starting products ingestion")
+    ingest_products(products_json_path, orders_dw_engine)
+    logger.info("Products loaded successfully")
 
 if __name__ == "__main__":
     run_pipeline()

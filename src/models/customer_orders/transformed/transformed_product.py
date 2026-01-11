@@ -1,24 +1,14 @@
+from dataclasses import dataclass
 from typing import Optional
-from pydantic import BaseModel
 
 
-class RawProduct(BaseModel):
+@dataclass
+class TransformedProduct:
     ProductKey: int
-    ProductCode: Optional[str] = None
     ProductName: Optional[str] = None
-
-    Manufacturer: Optional[str] = None
     Brand: Optional[str] = None
     Color: Optional[str] = None
-
-    WeightUnit: Optional[str] = None
-    Weight: Optional[float] = None
-
-    Cost: Optional[float] = None
-    Price: Optional[float] = None
-
     CategoryKey: Optional[int] = None
     CategoryName: Optional[str] = None
-
     SubCategoryKey: Optional[int] = None
     SubCategoryName: Optional[str] = None
