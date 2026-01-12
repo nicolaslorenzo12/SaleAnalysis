@@ -1,28 +1,35 @@
 from __future__ import annotations
 
 from dataclasses import asdict
+from typing import Iterator, TypeVar
 
 from sqlalchemy import Engine, text
 
+T = TypeVar("T")
 
-def load_rows(
-    dw_engine: Engine,
+
+def batched_dicts(items: list[T], batch_size: int) -> Iterator[list[dict[str, str]]]:
+    for i in range(0, len(items), batch_size):
+        yield [asdict(x) for x in items[i : i + batch_size]]
+
+
+def load_table(
+    *,
+    engine: Engine,
     table_name: str,
     insert_sql: str,
-    rows: list[object],
+    items: list[T],
     truncate: bool = True,
     batch_size: int | None = None,
 ) -> None:
-    stmt = text(insert_sql)
 
-    with dw_engine.begin() as conn:
+    with engine.begin() as conn:
         if truncate:
             conn.execute(text(f"TRUNCATE TABLE {table_name};"))
 
-        if batch_size:
-            for i in range(0, len(rows), batch_size):
-                batch = [asdict(r) for r in rows[i : i + batch_size]]
-                if batch:
-                    conn.execute(stmt, batch)
+        if batch_size is None:
+            for item in items:
+                conn.execute(insert_sql, asdict(item))
         else:
-            conn.execute(stmt, [asdict(r) for r in rows])
+            for batch in batched_dicts(items, batch_size):
+                conn.execute(insert_sql, batch)

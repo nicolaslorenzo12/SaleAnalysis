@@ -1,14 +1,10 @@
 from __future__ import annotations
-
-from dataclasses import asdict
 from typing import List
-
 from sqlalchemy import Engine, text
-
 from models.customer_orders.transformed.transformed_product import TransformedProduct
+from pipeline.data_ingestion.loaders.shared.rows_loader import load_table
 
 DM_PRODUCT_TABLE = "dbo.dm_product"
-
 
 def load_products(
     dw_engine: Engine,
@@ -32,9 +28,11 @@ def load_products(
         )
     """)
 
-    with dw_engine.begin() as conn:
-        if truncate:
-            conn.execute(text(f"TRUNCATE TABLE {DM_PRODUCT_TABLE};"))
-
-        for rows in products_to_load:
-            conn.execute(insert_sql, asdict(rows))
+    load_table(
+        engine=dw_engine,
+        table_name=DM_PRODUCT_TABLE,
+        insert_sql=insert_sql,
+        items=products_to_load,
+        truncate=truncate,
+        batch_size=None,
+    )

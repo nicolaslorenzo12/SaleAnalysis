@@ -1,26 +1,12 @@
 from __future__ import annotations
-
-from dataclasses import asdict
-from typing import Iterator, Any
-
 from sqlalchemy import Engine, text
-
 from models.customer_orders.transformed.transformed_date import TransformedDate
-
+from pipeline.data_ingestion.loaders.shared.rows_loader import load_table
 DM_DATE_TABLE = "dbo.dm_date"
-
-
-def batched_dicts(
-    items: list[TransformedDate],
-    batch_size: int,
-) -> Iterator[list[dict[str, Any]]]:
-    for i in range(0, len(items), batch_size):
-        yield [asdict(c) for c in items[i : i + batch_size]]
-
 
 def load_dates(
     dw_engine: Engine,
-    customers: list[TransformedDate],
+    dates_to_load: list[TransformedDate],
     *,
     truncate: bool = True,
     batch_size: int = 5000,
@@ -40,9 +26,11 @@ def load_dates(
         )
     """)
 
-    with dw_engine.begin() as conn:
-        if truncate:
-            conn.execute(text(f"TRUNCATE TABLE {DM_DATE_TABLE};"))
-
-        for rows in batched_dicts(customers, batch_size):
-            conn.execute(insert_sql, rows)
+    load_table(
+        engine=dw_engine,
+        table_name=DM_DATE_TABLE,
+        insert_sql=insert_sql,
+        items=dates_to_load,
+        truncate=truncate,
+        batch_size=batch_size,
+    )

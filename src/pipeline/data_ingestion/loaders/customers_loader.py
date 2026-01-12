@@ -1,26 +1,14 @@
 from __future__ import annotations
-
-from dataclasses import asdict
-from typing import Iterator, Any
-
 from sqlalchemy import Engine, text
 
 from models.customer_orders.transformed.transformed_customer import TransformedCustomer
+from pipeline.data_ingestion.loaders.shared.rows_loader import load_table
 
 DM_CUSTOMER_TABLE = "dbo.dm_customer"
 
-
-def batched_dicts(
-    items: list[TransformedCustomer],
-    batch_size: int,
-) -> Iterator[list[dict[str, Any]]]:
-    for i in range(0, len(items), batch_size):
-        yield [asdict(c) for c in items[i : i + batch_size]]
-
-
 def load_customers(
     dw_engine: Engine,
-    customers: list[TransformedCustomer],
+    customers_to_load: list[TransformedCustomer],
     *,
     truncate: bool = True,
     batch_size: int = 5000,
@@ -38,9 +26,11 @@ def load_customers(
         )
     """)
 
-    with dw_engine.begin() as conn:
-        if truncate:
-            conn.execute(text(f"TRUNCATE TABLE {DM_CUSTOMER_TABLE};"))
-
-        for rows in batched_dicts(customers, batch_size):
-            conn.execute(insert_sql, rows)
+    load_table(
+        engine=dw_engine,
+        table_name=DM_CUSTOMER_TABLE,
+        insert_sql=insert_sql,
+        items=customers_to_load,
+        truncate=truncate,
+        batch_size=batch_size,
+    )
