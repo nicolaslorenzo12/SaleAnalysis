@@ -1,14 +1,26 @@
 from __future__ import annotations
 
 from dataclasses import asdict
-from typing import Iterator, TypeVar
+from typing import Iterator, TypeVar, TypeAlias
 
 from sqlalchemy import Engine, text
 
-T = TypeVar("T")
+from models.customer_orders.transformed.transformed_customer import TransformedCustomer
+from models.customer_orders.transformed.transformed_date import TransformedDate
+from models.customer_orders.transformed.transformed_product import TransformedProduct
+from models.customer_orders.transformed.transformed_store import TransformedStore
+
+AllowedRow: TypeAlias = (
+    TransformedStore
+    | TransformedCustomer
+    | TransformedDate
+    | TransformedProduct
+)
+
+T = TypeVar("T", bound=AllowedRow)
 
 
-def batched_dicts(items: list[T], batch_size: int) -> Iterator[list[dict[str, str]]]:
+def batched_dicts(items: list[T], batch_size: int) -> Iterator[list[dict[str, object]]]:
     for i in range(0, len(items), batch_size):
         yield [asdict(x) for x in items[i : i + batch_size]]
 
