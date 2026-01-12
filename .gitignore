@@ -16,8 +16,6 @@ dist/
 
 .env
 
-data/
-
 # Logs
 *.log
 
