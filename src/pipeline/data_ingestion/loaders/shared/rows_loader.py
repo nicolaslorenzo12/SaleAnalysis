@@ -5,10 +5,10 @@ from typing import Iterator, TypeVar, TypeAlias
 
 from sqlalchemy import Engine, text
 
-from models.customer_orders.transformed.transformed_customer import TransformedCustomer
-from models.customer_orders.transformed.transformed_date import TransformedDate
-from models.customer_orders.transformed.transformed_product import TransformedProduct
-from models.customer_orders.transformed.transformed_store import TransformedStore
+from models.orders_DW.transformed.transformed_customer import TransformedCustomer
+from models.orders_DW.transformed.transformed_date import TransformedDate
+from models.orders_DW.transformed.transformed_product import TransformedProduct
+from models.orders_DW.transformed.transformed_store import TransformedStore
 
 AllowedRow: TypeAlias = (
     TransformedStore

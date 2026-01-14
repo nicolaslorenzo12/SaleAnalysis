@@ -1,7 +1,7 @@
 from __future__ import annotations
 from typing import List
 from sqlalchemy import Engine, text
-from models.customer_orders.transformed.transformed_store import TransformedStore
+from models.orders_DW.transformed.transformed_store import TransformedStore
 from pipeline.data_ingestion.loaders.shared.rows_loader import load_table
 
 DM_STORE_TABLE = "dbo.dm_store"

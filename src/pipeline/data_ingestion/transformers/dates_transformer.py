@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from models.customer_orders.raw.raw_date import RawDate
-from models.customer_orders.transformed.transformed_date import TransformedDate
+from models.orders_DW.transformed.transformed_date import TransformedDate
 
 def transform_dates(raw_dates: list[RawDate]) -> list[TransformedDate]:
     return [

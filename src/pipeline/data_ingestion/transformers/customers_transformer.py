@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Optional
 
 from models.customer_orders.raw.raw_customer import RawCustomer
-from models.customer_orders.transformed.transformed_customer import TransformedCustomer
+from models.orders_DW.transformed.transformed_customer import TransformedCustomer
 
 
 def _build_full_name(

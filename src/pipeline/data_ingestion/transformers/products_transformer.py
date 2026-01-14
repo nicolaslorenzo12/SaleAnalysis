@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from models.customer_orders.raw.raw_product import RawProduct
-from models.customer_orders.transformed.transformed_product import TransformedProduct
+from models.orders_DW.transformed.transformed_product import TransformedProduct
 
 
 def transform_products(raw_products: list[RawProduct]) -> list[TransformedProduct]:

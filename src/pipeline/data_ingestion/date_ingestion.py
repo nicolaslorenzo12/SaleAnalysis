@@ -8,7 +8,7 @@ from pipeline.data_ingestion.transformers.dates_transformer import transform_dat
 
 logger = logging.getLogger(__name__)
 
-from models.customer_orders.transformed.transformed_customer import TransformedCustomer
+from models.orders_DW.transformed.transformed_customer import TransformedCustomer
 
 
 def ingest_dates(customer_orders_engine: Engine, orders_dw_engine: Engine):

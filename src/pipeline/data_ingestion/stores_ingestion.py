@@ -4,7 +4,7 @@ from pathlib import Path
 from sqlalchemy import Engine
 
 from models.customer_orders.raw.raw_store import RawStore
-from models.customer_orders.transformed.transformed_store import TransformedStore
+from models.orders_DW.transformed.transformed_store import TransformedStore
 from pipeline.data_ingestion.extractors.raw_stores_extractor import extract_raw_stores_from_csv
 from pipeline.data_ingestion.loaders.stores_loader import load_stores
 from pipeline.data_ingestion.transformers.stores_transformer import transform_stores

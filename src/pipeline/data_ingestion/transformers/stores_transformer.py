@@ -1,6 +1,6 @@
 from __future__ import annotations
 from models.customer_orders.raw.raw_store import RawStore
-from models.customer_orders.transformed.transformed_store import TransformedStore
+from models.orders_DW.transformed.transformed_store import TransformedStore
 
 
 def _normalize_country_code(value: str | None) -> str | None:

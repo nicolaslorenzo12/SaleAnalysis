@@ -6,13 +6,13 @@ from pydantic import BaseModel
 
 class RawOrder(BaseModel):
     OrderKey: int
-    CustomerKey: Optional[int] = None
-    StoreKey: Optional[int] = None
+    CustomerKey: int
+    StoreKey: int
 
-    OrderDate: Optional[date] = None
-    DeliveryDate: Optional[date] = None
+    OrderDate: date
+    DeliveryDate: date
 
-    CurrencyCode: Optional[str] = None
+    CurrencyCode: str
 
     model_config = {
         "from_attributes": True,

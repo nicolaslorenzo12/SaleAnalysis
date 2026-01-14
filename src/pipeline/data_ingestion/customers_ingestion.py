@@ -3,7 +3,7 @@ from sqlalchemy import Engine
 
 logger = logging.getLogger(__name__)
 
-from models.customer_orders.transformed.transformed_customer import TransformedCustomer
+from models.orders_DW.transformed.transformed_customer import TransformedCustomer
 from models.customer_orders.raw.raw_customer import RawCustomer
 from pipeline.data_ingestion.extractors.raw_customers_extractor import extract_raw_customers
 from pipeline.data_ingestion.transformers.customers_transformer import transform_customers

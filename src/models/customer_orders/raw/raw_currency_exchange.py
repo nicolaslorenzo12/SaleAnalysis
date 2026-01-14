@@ -1,4 +1,6 @@
 from datetime import date
+from decimal import Decimal
+
 from pydantic import BaseModel
 
 
@@ -8,7 +10,7 @@ class RawCurrencyExchange(BaseModel):
     FromCurrency: str
     ToCurrency: str
 
-    Exchange: float
+    Exchange: Decimal
 
     model_config = {
         "from_attributes": True,
