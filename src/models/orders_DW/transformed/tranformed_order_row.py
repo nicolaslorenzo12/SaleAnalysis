@@ -11,6 +11,9 @@ class TransformedOrderRow:
     CustomerKey: int
     StoreKey: int
     Quantity: int
+    UnitPrice: Decimal
+    NetPrice: Decimal
+    UnitCost: Decimal
     OrderDate: date
     UnitPriceInUSD: Decimal
     NetPriceInUSD: Decimal

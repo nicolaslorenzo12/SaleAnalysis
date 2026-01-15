@@ -10,7 +10,6 @@ from pipeline.data_ingestion.extractors.raw_currency_exchanges_extractor import 
 from pipeline.data_ingestion.extractors.raw_order_rows_extractor import extract_raw_order_rows_from_parquet
 from pipeline.data_ingestion.extractors.raw_orders_extractor import extract_raw_orders
 from pipeline.data_ingestion.loaders.order_rows_loader import load_order_rows
-from pipeline.data_ingestion.stagers.order_rows_stager import stage_order_rows
 from pipeline.data_ingestion.transformers.order_rows_transformer import transform_order_rows
 
 logger = logging.getLogger(__name__)
