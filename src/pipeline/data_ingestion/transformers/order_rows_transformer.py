@@ -1,3 +1,4 @@
+from datetime import date
 from decimal import Decimal
 from typing import List
 
@@ -13,7 +14,7 @@ BASE_CCY = "USD"
 # Build foreign exchange to use
 def _build_fx_to_usd_lookup(
     currency_exchanges: List[RawCurrencyExchange],
-) -> dict[tuple, Decimal]:
+) -> dict[tuple[date, str], Decimal]:
     return {
         (fx.Date, fx.FromCurrency): Decimal(str(fx.Exchange))
         for fx in currency_exchanges
@@ -54,9 +55,9 @@ def transform_order_rows(
     orders_by_key = {o.OrderKey: o for o in orders}
     fx_to_usd = _build_fx_to_usd_lookup(currency_exchanges)
 
-    staged_rows: List[TransformedOrderRow] = []
+    transformed_rows: List[TransformedOrderRow] = []
     for order_row in order_rows:
         order = orders_by_key[order_row.OrderKey]
-        staged_rows.append(_build_transformed_order_row(order_row, order, fx_to_usd))
+        transformed_rows.append(_build_transformed_order_row(order_row, order, fx_to_usd))
 
-    return staged_rows
+    return transformed_rows

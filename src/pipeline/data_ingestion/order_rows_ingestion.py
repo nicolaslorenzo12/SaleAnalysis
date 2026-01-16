@@ -22,8 +22,6 @@ def ingest_order_rows(order_rows_parquet_path: Path, customer_orders_engine: Eng
     raw_order_list: list[RawOrder] = extract_raw_orders(customer_orders_engine)
     logger.info("Extracting currency exchange rates")
     raw_currency_exchange_list: list[RawCurrencyExchange] = extract_raw_currency_exchanges(customer_orders_engine)
-
-
     logger.info("Transforming order rows")
     transformed_order_row_list = transform_order_rows(raw_order_row_list, raw_order_list, raw_currency_exchange_list)
     logger.info("Loading order rows")

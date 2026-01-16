@@ -7,8 +7,8 @@ from pydantic import BaseModel, Field, field_validator, computed_field
 
 class RawStore(BaseModel):
     StoreKey: int
-    StoreCode: Optional[int] = None
-    GeoAreaKey: Optional[int] = None
+    StoreCode: int
+    GeoAreaKey: int
 
     CountryCode: Optional[str] = None
     CountryName: Optional[str] = None

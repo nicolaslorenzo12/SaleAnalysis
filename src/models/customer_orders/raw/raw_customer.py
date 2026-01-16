@@ -6,7 +6,7 @@ from pydantic import BaseModel
 
 class RawCustomer(BaseModel):
     CustomerKey: int
-    GeoAreaKey: Optional[int] = None
+    GeoAreaKey: int
 
     StartDT: Optional[date] = None
     EndDT: Optional[date] = None
@@ -25,14 +25,14 @@ class RawCustomer(BaseModel):
     Country: Optional[str] = None
     CountryFull: Optional[str] = None
 
-    Birthday: Optional[date] = None
-    Age: Optional[int] = None
-    Occupation: Optional[str] = None
+    Birthday: date
+    Age: int
+    Occupation: str
     Company: Optional[str] = None
     Vehicle: Optional[str] = None
 
-    Latitude: Optional[float] = None
-    Longitude: Optional[float] = None
+    Latitude: float
+    Longitude: float
 
 
 

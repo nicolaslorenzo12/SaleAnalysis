@@ -4,7 +4,7 @@ from pydantic import BaseModel
 
 class RawProduct(BaseModel):
     ProductKey: int
-    ProductCode: Optional[str] = None
+    ProductCode: str
     ProductName: Optional[str] = None
 
     Manufacturer: Optional[str] = None

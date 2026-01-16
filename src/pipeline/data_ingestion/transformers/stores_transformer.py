@@ -6,7 +6,6 @@ from models.orders_DW.transformed.transformed_store import TransformedStore
 def _normalize_country_code(value: str | None) -> str | None:
     return None if value == "--" else value
 
-
 def transform_stores(raw_stores: list[RawStore]) -> list[TransformedStore]:
     return [
         TransformedStore(
